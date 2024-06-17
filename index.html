@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Prompt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+        }
+
+        #response {
+            height: 200px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1>Generative AI Prompt</h1>
+<label for="sourceCode">Source Code:</label>
+<textarea id="sourceCode" placeholder="Enter source code here..."></textarea>
+
+<label for="prompt">Prompt:</label>
+<textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+
+<label for="response">Response:</label>
+<textarea id="response" readonly></textarea>
+
+<button onclick="generateResponse()">Generate</button>
+
+<script>
+    async function generateResponse() {
+        const sourceCode = document.getElementById('sourceCode').value;
+        const prompt = document.getElementById('prompt').value;
+        const responseField = document.getElementById('response');
+
+        const requestData = {
+            source_code: sourceCode,
+            prompt: prompt
+        };
+
+        try {
+            const response = await fetch('https://o9pvcl5fc2.execute-api.us-east-1.amazonaws.com/dev/invoke', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            });
+            console.log(response);
+            if (response.ok) {
+                const data = await response.json();
+                responseField.value = data.response;
+            } else {
+                responseField.value = 'Error: ' + response.statusText;
+            }
+        } catch (error) {
+            responseField.value = 'Error: ' + error.message;
+        }
+    }
+</script>
+</body>
+</html>
