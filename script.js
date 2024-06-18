@@ -1,13 +1,14 @@
 const API_URL = 'https://c4zdfged5i.execute-api.ca-central-1.amazonaws.com/dev/invoke';
 
 async function invokeClaude() {
+    const model = document.getElementById('modelSelect').value;
     const sourceCode = document.getElementById('sourceCode').value;
     const sourceCodeFile = document.getElementById('sourceCodeFile').files[0];
     const prompt = document.getElementById('prompt').value;
     const responseField = document.getElementById('response');
 
     try {
-        const response = sourceCodeFile ? await invokeWithFile(prompt, sourceCodeFile) : await invokeWithCode(prompt, sourceCode);
+        const response = sourceCodeFile ? await invokeWithFile(model, prompt, sourceCodeFile) : await invokeWithCode(model, prompt, sourceCode);
         displayResponse(responseField, response);
     } catch (error) {
         displayError(responseField, error);
@@ -23,8 +24,9 @@ async function fetchFromAPI(url, options) {
     }
 }
 
-async function invokeWithFile(prompt, file) {
+async function invokeWithFile(model, prompt, file) {
     let formData = new FormData();
+    formData.append('model', model);
     formData.append('prompt', prompt);
     formData.append('file', file);
 
@@ -34,8 +36,8 @@ async function invokeWithFile(prompt, file) {
     });
 }
 
-async function invokeWithCode(prompt, sourceCode) {
-    const requestData = {source_code: sourceCode, prompt: prompt};
+async function invokeWithCode(model, prompt, sourceCode) {
+    const requestData = {model: model, prompt: prompt, source_code: sourceCode};
 
     return fetchFromAPI(API_URL, {
         method: 'POST',

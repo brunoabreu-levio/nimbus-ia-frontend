@@ -8,6 +8,14 @@
     </head>
     <body>
         <h1>Generative AI Prompt</h1>
+
+        <label for="modelSelect">Claude AI Language Model:</label>
+        <select id="modelSelect">
+<!--            <option value="anthropic.claude-3-opus-20240229-v1:0">OPUS</option>-->
+            <option value="anthropic.claude-3-sonnet-20240229-v1:0">SONNET</option>
+            <option value="anthropic.claude-3-haiku-20240307-v1:0">HAIKU</option>
+        </select>
+
         <label for="sourceCode">Source Code:</label>
         <textarea id="sourceCode" placeholder="Enter source code here..."></textarea>
 
