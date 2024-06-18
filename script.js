@@ -14,29 +14,34 @@ async function invokeClaude() {
     }
 }
 
+async function fetchFromAPI(url, options) {
+    try {
+        const response = await fetch(url, options);
+        return handleResponse(response);
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function invokeWithFile(prompt, file) {
     let formData = new FormData();
     formData.append('prompt', prompt);
     formData.append('file', file);
 
-    const response = await fetch(API_URL, {
+    return fetchFromAPI(API_URL, {
         method: 'POST',
         body: formData
     });
-
-    return handleResponse(response);
 }
 
 async function invokeWithCode(prompt, sourceCode) {
     const requestData = {source_code: sourceCode, prompt: prompt};
 
-    const response = await fetch(API_URL, {
+    return fetchFromAPI(API_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(requestData)
     });
-
-    return handleResponse(response);
 }
 
 async function handleResponse(response) {
@@ -49,10 +54,25 @@ async function handleResponse(response) {
 
 function displayResponse(field, data) {
     field.value = data.response;
+
+    const downloadButton = document.getElementById('downloadBtn');
+    downloadButton.disabled = field.value.trim().length === 0
 }
 
 function displayError(field, error) {
     field.value = 'Error: ' + error.message;
+}
+
+function downloadResponse() {
+    const responseText = document.getElementById('response').value;
+    const blob = new Blob([responseText], {type: 'text/plain'});
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = "response.txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
