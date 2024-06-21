@@ -15,6 +15,7 @@ const languages = {
         'response-label': 'Response',
         'generate-button-span': 'Generate',
         'download-button-span': 'Download Response',
+        'loading-span': 'Loading...',
         'last-name-label': 'Last Name',
         'last-name-input': {
             'text': 'Enter your last name', 'data-val-required': 'The “Last Name” field is required.'
@@ -114,6 +115,7 @@ const languages = {
         'response-label': 'Réponse',
         'generate-button-span': 'Générer',
         'download-button-span': 'Télécharger la réponse',
+        'loading-span': 'Chargement...',
         'last-name-label': 'Nom',
         'last-name-input': {
             'text': 'Saisir votre nom', 'data-val-required': 'Le champ « Nom » est requis.'

@@ -1,18 +1,21 @@
 const API_URL = 'https://c4zdfged5i.execute-api.ca-central-1.amazonaws.com/dev/invoke';
 
 async function invokeClaude() {
+    const loadingDiv = document.getElementById('loading');
     const model = document.getElementById('modelSelect').value;
     const sourceCode = document.getElementById('sourceCode').value;
     const sourceCodeFile = document.getElementById('sourceCodeFile').files[0];
     const prompt = document.getElementById('prompt').value;
     const responseField = document.getElementById('response');
 
+    loadingDiv.style.visibility = 'visible';
     try {
         const response = sourceCodeFile ? await invokeWithFile(model, prompt, sourceCodeFile) : await invokeWithCode(model, prompt, sourceCode);
         displayResponse(responseField, response);
     } catch (error) {
         displayError(responseField, error);
     }
+    loadingDiv.style.visibility = 'hidden';
 }
 
 async function fetchFromAPI(url, options) {
