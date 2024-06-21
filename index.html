@@ -1237,6 +1237,8 @@
                                            for="sourceCodeFile" data-key="upload-label">Upload Source Code File</label>
                                     <input type="file" id="sourceCodeFile">
                                     <span></span>
+                                    <span class="block"
+                                          id="sourceCodeFileMsg" style="visibility:hidden;color:red" data-key="source-code-file-span"></span>
                                 </div>
 
                                 <div class="pf-form-field sm:col-span-6">
@@ -1258,7 +1260,7 @@
                                 <span id="loading" style="visibility:hidden;" data-key="loading-span"></span>
 
                                 <div class="sm:col-span-6 text-center">
-                                    <button onclick="invokeClaude()"
+                                    <button id="generateBtn" onclick="invokeClaude()"
                                             class="group pf-button pf-button--lg pf-button--primary pf-transition-outline h-focus-state h-focus-state--offset-primary">
                                         <span class="relative"
                                               data-key="generate-button-span">Generate</span>

@@ -6,6 +6,7 @@ const languages = {
             'text': 'Enter source code here...', 'data-val-required': 'The “Last Name” field is required.'
         },
         'source-code-label': 'Source Code',
+        'source-code-file-span': 'Maximum size exceeded. Maximum size allowed is 10 Mb.',
         'upload-label': 'Upload Source Code File',
         'prompt-label': 'Prompt',
         'prompt-input': {
@@ -106,6 +107,7 @@ const languages = {
             'text': 'Entrez le code source ici...', 'data-val-required': 'Le champ « Nom » est requis.'
         },
         'source-code-label': 'Code Source',
+        'source-code-file-span': 'Taille maximale dépassée. La taille maximale autorisée est de 10 Mo.',
         'upload-label': 'Télécharger Le Fichier De Code Source',
         'prompt-label': 'Prompt',
         'prompt-input': {

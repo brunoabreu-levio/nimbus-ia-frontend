@@ -92,3 +92,18 @@ document.addEventListener('DOMContentLoaded', function () {
         sourceCodeInput.disabled = sourceCodeFileInput.files.length > 0;
     });
 });
+
+document.getElementById('sourceCodeFile').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const maxFileSize = 10 * 1024 * 1024;
+    const sourceCodeFileMsg = document.getElementById('sourceCodeFileMsg');
+    const generateBtn = document.getElementById('generateBtn');
+
+    if (file.size > maxFileSize) {
+        sourceCodeFileMsg.style.visibility = 'visible';
+        generateBtn.disabled = true
+    } else {
+        sourceCodeFileMsg.style.visibility = 'hidden';
+        generateBtn.disabled = false
+    }
+});
