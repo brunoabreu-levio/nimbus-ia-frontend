@@ -1,9 +1,13 @@
 textarea {
     width: 100%;
-    height: 100px;
+    height: 200px;
     margin-top: 5px;
 }
 
+textarea#sourceCode {
+    height: 90vh;
+}
+
 #response {
-    height: 200px;
+    height: 90vh;
 }
